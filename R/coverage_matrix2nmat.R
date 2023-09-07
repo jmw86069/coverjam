@@ -64,6 +64,8 @@
 #' @param verbose logical indicating whether to print verbose output.
 #' @param ... additional arguments are ignored.
 #'
+#' @import data.table
+#'
 #' @examples
 #' ## There is a small example file to use for testing
 #' cov_file <- system.file("data", "tss_coverage.matrix", package="platjam");
