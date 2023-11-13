@@ -814,44 +814,50 @@ only the first heatmap in each panel group.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## There is a small example file to use for testing</span></span></span>
 <span class="r-in"><span><span class="co"># library(jamba)</span></span></span>
-<span class="r-in"><span><span class="va">cov_file1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"tss_coverage.matrix"</span>, package<span class="op">=</span><span class="st">"platjam"</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span><span class="va">cov_file2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"h3k4me1_coverage.matrix"</span>, package<span class="op">=</span><span class="st">"platjam"</span><span class="op">)</span>;</span></span>
+<span class="r-in"><span><span class="va">cov_file1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"tss_coverage.matrix"</span>,</span></span>
+<span class="r-in"><span>   package<span class="op">=</span><span class="st">"coverjam"</span><span class="op">)</span>;</span></span>
+<span class="r-in"><span><span class="va">cov_file2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"h3k4me1_coverage.matrix"</span>,</span></span>
+<span class="r-in"><span>   package<span class="op">=</span><span class="st">"coverjam"</span><span class="op">)</span>;</span></span>
 <span class="r-in"><span><span class="va">cov_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cov_file1</span>, <span class="va">cov_file2</span><span class="op">)</span>;</span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cov_files</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"[.]matrix"</span>,</span></span>
 <span class="r-in"><span>   <span class="st">""</span>,</span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">cov_files</span><span class="op">)</span><span class="op">)</span>;</span></span>
 <span class="r-in"><span><span class="va">nmatlist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cov_files</span>, <span class="va">coverage_matrix2nmat</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in FUN(X[[i]], ...):</span> Supplied x must be class data.frame, DataFrame, data.table, or tibble.</span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># sometimes data transform can be helpful</span></span></span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist</span>,</span></span>
 <span class="r-in"><span>   transform<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2signed"</span>, <span class="st">"sqrt"</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># k-means clusters, default uses euclidean distance</span></span></span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist</span>, k_clusters<span class="op">=</span><span class="fl">4</span>,</span></span>
 <span class="r-in"><span>   transform<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2signed"</span>, <span class="st">"sqrt"</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># k-means clusters, "correlation" or "pearson" sometimes works better</span></span></span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist</span>,</span></span>
 <span class="r-in"><span>   k_clusters<span class="op">=</span><span class="fl">4</span>,</span></span>
 <span class="r-in"><span>   k_method<span class="op">=</span><span class="st">"pearson"</span>,</span></span>
 <span class="r-in"><span>   transform<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2signed"</span>, <span class="st">"sqrt"</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example showing usage of top_axis_side</span></span></span>
 <span class="r-in"><span><span class="co"># and panel_groups</span></span></span>
 <span class="r-in"><span><span class="va">nmatlist2</span> <span class="op">&lt;-</span> <span class="va">nmatlist</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nmatlist2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">jamba</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamba/man/makeNames.html" class="external-link">makeNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nmatlist2</span><span class="op">)</span>, suffix<span class="op">=</span><span class="st">"_rep"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist2' not found</span>
 <span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">iname</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nmatlist2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">nmatlist2</span><span class="op">[[</span><span class="va">iname</span><span class="op">]</span><span class="op">]</span>, <span class="st">"signal_name"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"coverage"</span>, <span class="st">"cov"</span>, <span class="va">iname</span><span class="op">)</span>;</span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist2' not found</span>
 <span class="r-in"><span><span class="co"># top_axis_side="left"</span></span></span>
 <span class="r-in"><span><span class="co"># assumes 12x7 figure size</span></span></span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist2</span>,</span></span>
@@ -861,7 +867,9 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>   ht_gap<span class="op">=</span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">4</span>, <span class="st">"mm"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   top_axis_side<span class="op">=</span><span class="st">"left"</span>,</span></span>
 <span class="r-in"><span>   transform<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2signed"</span>, <span class="st">"sqrt"</span><span class="op">)</span>, each<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist2' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># top_axis_side="both"</span></span></span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist2</span>,</span></span>
@@ -869,7 +877,9 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>   ht_gap<span class="op">=</span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">6</span>, <span class="st">"mm"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   top_axis_side<span class="op">=</span><span class="st">"both"</span>,</span></span>
 <span class="r-in"><span>   transform<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2signed"</span>, <span class="st">"sqrt"</span><span class="op">)</span>, each<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist2' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># multiple heatmap rows</span></span></span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist2</span>,</span></span>
@@ -881,7 +891,8 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>   top_axis_side<span class="op">=</span><span class="st">"right"</span>,</span></span>
 <span class="r-in"><span>   top_anno_height<span class="op">=</span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="st">"cm"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   hm_nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist2' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># invent anno_df data.frame of additional annotations</span></span></span>
@@ -889,9 +900,7 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>   tss_score<span class="op">=</span><span class="fu">EnrichedHeatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnrichedHeatmap/man/enriched_score.html" class="external-link">enriched_score</a></span><span class="op">(</span><span class="fu">jamba</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamba/man/log2signed.html" class="external-link">log2signed</a></span><span class="op">(</span><span class="va">nmatlist</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   h3k4me1_score<span class="op">=</span><span class="fu">EnrichedHeatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnrichedHeatmap/man/enriched_score.html" class="external-link">enriched_score</a></span><span class="op">(</span><span class="fu">jamba</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamba/man/log2signed.html" class="external-link">log2signed</a></span><span class="op">(</span><span class="va">nmatlist</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">anno_df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">nmatlist</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'nmatlist' not found</span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist</span>,</span></span>
 <span class="r-in"><span>   title<span class="op">=</span><span class="st">"k-means clustering across both heatmaps"</span>,</span></span>
 <span class="r-in"><span>   k_clusters<span class="op">=</span><span class="fl">5</span>,</span></span>
@@ -903,7 +912,9 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>   top_axis_side<span class="op">=</span><span class="st">"left"</span>,</span></span>
 <span class="r-in"><span>   anno_df<span class="op">=</span><span class="va">anno_df</span>,</span></span>
 <span class="r-in"><span>   transform<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2signed"</span>, <span class="st">"sqrt"</span><span class="op">)</span>, each<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example showing k-means clustering together with annotation groups</span></span></span>
 <span class="r-in"><span><span class="va">anno_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
@@ -911,7 +922,6 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>      size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">nmatlist</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   row.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">nmatlist</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'nmatlist' not found</span>
 <span class="r-in"><span><span class="co"># note for this example the color legends are oriented vertically</span></span></span>
 <span class="r-in"><span><span class="co"># showing how the width is adjusted</span></span></span>
 <span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist</span>,</span></span>
@@ -924,7 +934,9 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>   anno_df<span class="op">=</span><span class="va">anno_df</span>,</span></span>
 <span class="r-in"><span>   partition<span class="op">=</span><span class="st">"group"</span>,</span></span>
 <span class="r-in"><span>   row_title_rot<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-8.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># same as above, partition and k_clusters together</span></span></span>
 <span class="r-in"><span><span class="co"># except uses multiple values for k_clusters</span></span></span>
@@ -936,7 +948,24 @@ only the first heatmap in each panel group.</p></li>
 <span class="r-in"><span>   anno_df<span class="op">=</span><span class="va">anno_df</span>,</span></span>
 <span class="r-in"><span>   partition<span class="op">=</span><span class="st">"group"</span>,</span></span>
 <span class="r-in"><span>   row_title_rot<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nmatlist' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-9.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># as above, showing custom upstream_length, downstream_length</span></span></span>
+<span class="r-in"><span><span class="fu">nmatlist2heatmaps</span><span class="op">(</span><span class="va">nmatlist</span>,</span></span>
+<span class="r-in"><span>   k_clusters<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>   upstream_length<span class="op">=</span><span class="fl">500</span>,</span></span>
+<span class="r-in"><span>   downstream_length<span class="op">=</span><span class="fl">500</span>,</span></span>
+<span class="r-in"><span>   min_rows_per_k<span class="op">=</span><span class="fl">25</span>,</span></span>
+<span class="r-in"><span>   k_heatmap<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span></span>
+<span class="r-in"><span>   ht_gap<span class="op">=</span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">12</span>, <span class="st">"mm"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>   anno_df<span class="op">=</span><span class="va">anno_df</span>,</span></span>
+<span class="r-in"><span>   partition<span class="op">=</span><span class="st">"group"</span>,</span></span>
+<span class="r-in"><span>   row_title_rot<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: magick</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'magick' package should be installed.</span>
+<span class="r-plt img"><img src="nmatlist2heatmaps-10.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
