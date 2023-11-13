@@ -1,6 +1,7 @@
 # TODO 13nov2023
 
 * Migrate fully functional `nmatlist2heatmaps()` and supporting functions.
+* Debug Github pkgdown actions
 * Plan shell script wrapper function similar to slicejam:
 
    * `setup_coverjam()` creates bash shell script to define RHOME,

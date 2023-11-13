@@ -640,10 +640,16 @@
 #'    row_title_rot=0)
 #'
 #' # as above, showing custom upstream_length, downstream_length
+#' set.seed(123);
+#' anno_df <- data.frame(
+#'    group=sample(c("A", "B", "B"),
+#'       size=nrow(nmatlist[[1]]),
+#'       replace=TRUE),
+#'    tss_score=EnrichedHeatmap::enriched_score(jamba::log2signed(nmatlist[[1]])),
+#'    h3k4me1_score=EnrichedHeatmap::enriched_score(jamba::log2signed(nmatlist[[2]]))
+#' );
 #' nmatlist2heatmaps(nmatlist,
 #'    k_clusters=c(1, 3),
-#'    upstream_length=500,
-#'    downstream_length=500,
 #'    min_rows_per_k=25,
 #'    k_heatmap=1:2,
 #'    ht_gap=grid::unit(12, "mm"),
@@ -712,7 +718,7 @@ nmatlist2heatmaps <- function
  iter.max=20,
  use_raster=TRUE,
  raster_quality=1,
- raster_by_magick=TRUE,
+ raster_by_magick=jamba::check_pkg_installed("magick"),
  do_plot=TRUE,
  legend_width=grid::unit(3, "cm"),
  trim_legend_title=TRUE,
@@ -1367,8 +1373,9 @@ nmatlist2heatmaps <- function
       if (verbose) {
          jamba::printDebug("nmatlist2heatmaps(): ",
             "sdim(anno_colors_l):");
-         print(sdim(anno_colors_l));
-         str(anno_colors_l);
+         print(jamba::sdim(anno_colors_l));
+         # str(anno_colors_l);
+         platjam::print_color_list(anno_colors_l);
       }
 
       ## annotation_legend_param
@@ -2057,6 +2064,7 @@ nmatlist2heatmaps <- function
          ht_1 <- grid::grid.grabExpr(
             ComplexHeatmap::draw(HM_temp,
                ht_gap=ht_gap,
+               adjust_annotation_extension=TRUE,
                main_heatmap=main_heatmap_temp));
          ht_1;
       });
@@ -2112,7 +2120,7 @@ nmatlist2heatmaps <- function
             (length(title) > 0 || length(caption) > 0)) {
          if (verbose) {
             jamba::printDebug("nmatlist2heatmaps(): ",
-               "Preparing ComplexHeatmap::draw(HeatmapList)");
+               "Preparing ComplexHeatmap::draw(HeatmapList) with title.");
          }
          HM_drawn <- ComplexHeatmap::draw(HM_temp,
             column_title=title,
@@ -2139,6 +2147,10 @@ nmatlist2heatmaps <- function
          }
       } else {
          if (do_plot) {
+            if (verbose) {
+               jamba::printDebug("nmatlist2heatmaps(): ",
+                  "Preparing ComplexHeatmap::draw(HeatmapList) without title.");
+            }
             HM_drawn <- ComplexHeatmap::draw(HM_temp,
                ht_gap=ht_gap,
                adjust_annotation_extension=TRUE,

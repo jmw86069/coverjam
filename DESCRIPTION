@@ -23,7 +23,8 @@ Imports: jamba (>= 0.0.96.900),
 Suggests: 
     amap,
     rprojroot,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    magick
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown=TRUE)
