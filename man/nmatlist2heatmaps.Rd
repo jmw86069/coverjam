@@ -704,8 +704,10 @@ only the first heatmap in each panel group.
 \examples{
 ## There is a small example file to use for testing
 # library(jamba)
-cov_file1 <- system.file("data", "tss_coverage.matrix", package="platjam");
-cov_file2 <- system.file("data", "h3k4me1_coverage.matrix", package="platjam");
+cov_file1 <- system.file("data", "tss_coverage.matrix",
+   package="coverjam");
+cov_file2 <- system.file("data", "h3k4me1_coverage.matrix",
+   package="coverjam");
 cov_files <- c(cov_file1, cov_file2);
 names(cov_files) <- gsub("[.]matrix",
    "",
@@ -804,6 +806,18 @@ nmatlist2heatmaps(nmatlist,
 # except uses multiple values for k_clusters
 nmatlist2heatmaps(nmatlist,
    k_clusters=c(1, 4),
+   min_rows_per_k=25,
+   k_heatmap=1:2,
+   ht_gap=grid::unit(12, "mm"),
+   anno_df=anno_df,
+   partition="group",
+   row_title_rot=0)
+
+# as above, showing custom upstream_length, downstream_length
+nmatlist2heatmaps(nmatlist,
+   k_clusters=c(1, 3),
+   upstream_length=500,
+   downstream_length=500,
    min_rows_per_k=25,
    k_heatmap=1:2,
    ht_gap=grid::unit(12, "mm"),

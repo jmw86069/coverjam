@@ -530,8 +530,10 @@
 #' @examples
 #' ## There is a small example file to use for testing
 #' # library(jamba)
-#' cov_file1 <- system.file("data", "tss_coverage.matrix", package="platjam");
-#' cov_file2 <- system.file("data", "h3k4me1_coverage.matrix", package="platjam");
+#' cov_file1 <- system.file("data", "tss_coverage.matrix",
+#'    package="coverjam");
+#' cov_file2 <- system.file("data", "h3k4me1_coverage.matrix",
+#'    package="coverjam");
 #' cov_files <- c(cov_file1, cov_file2);
 #' names(cov_files) <- gsub("[.]matrix",
 #'    "",
