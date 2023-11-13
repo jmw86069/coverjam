@@ -40,8 +40,13 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1.900" id="coverjam-001900">coverjam 0.0.1.900<a class="anchor" aria-label="anchor" href="#coverjam-001900"></a></h2>
-<ul><li>Migrated the updated <code><a href="../reference/nmatlist2heatmaps.html">nmatlist2heatmaps()</a></code> from platjam.</li>
-<li>Migrated <code><a href="../reference/zoom_nmat.html">zoom_nmat()</a></code> and <code><a href="../reference/zoom_nmatlist.html">zoom_nmatlist()</a></code> from platjam.</li>
+<ul><li><p>Migrated the updated <code><a href="../reference/nmatlist2heatmaps.html">nmatlist2heatmaps()</a></code> from platjam.</p></li>
+<li><p>Migrated <code><a href="../reference/zoom_nmat.html">zoom_nmat()</a></code> and <code><a href="../reference/zoom_nmatlist.html">zoom_nmatlist()</a></code> from platjam.</p></li>
+<li>
+<p><code><a href="../reference/nmatlist2heatmaps.html">nmatlist2heatmaps()</a></code></p>
+<ul><li>default <code>raster_by_magick</code> checks whether magick is installed. While <code>magick</code> is hugely preferred, it is not mandatory for <code>coverjam</code> because it can be non-trivial to install on some linux systems, mainly by requiring development libraries which may require an updated build chain, which ultimately requires root.</li>
+<li>added <code>magick</code> to Suggests.</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.900" id="coverjam-000900">coverjam 0.0.0.900<a class="anchor" aria-label="anchor" href="#coverjam-000900"></a></h2>
