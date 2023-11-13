@@ -97,49 +97,12 @@ however this function does not call that function, in
 favor of defining the attributes directly. In future, this
 function may change to call that function.
 }
-\examples{
-## There is a small example file to use for testing
-cov_file <- system.file("data", "tss_coverage.matrix", package="platjam");
-cov_file <- system.file("data", "h3k4me1_coverage.matrix", package="platjam");
-if (length(cov_file) > 0) {
-   nmat <- coverage_matrix2nmat(cov_file);
-   jamba::printDebug("signal_name: ",
-      attr(nmat, "signal_name"));
-
-if (suppressPackageStartupMessages(require(EnrichedHeatmap))) {
-   color <- "red3";
-   signal_name <- attr(nmat, "signal_name");
-   k <- 6;
-   set.seed(123);
-   partition <- kmeans(log10(1+nmat), centers=k)$cluster;
-   EH <- EnrichedHeatmap(log10(1+nmat),
-      split=partition,
-      pos_line=FALSE,
-      use_raster=TRUE,
-      col=jamba::getColorRamp(color, n=10),
-      top_annotation=HeatmapAnnotation(
-         lines=anno_enriched(gp=grid::gpar(col=colorjam::rainbowJam(k)))
-      ),
-      axis_name_gp=grid::gpar(fontsize=8),
-      name=signal_name,
-      column_title=signal_name
-   );
-   PHM <- Heatmap(partition,
-      use_raster=TRUE,
-      col=structure(colorjam::rainbowJam(k),
-         names=as.character(seq_len(k))),
-      name="partition",
-      show_row_names=FALSE,
-      width=grid::unit(3, "mm"));
-   draw(PHM + EH, main_heatmap=2);
-}
-}
-
-}
 \seealso{
 Other jam coverage heatmap functions: 
 \code{\link{get_nmat_ceiling}()},
-\code{\link{nmatlist2heatmaps}()}
+\code{\link{nmatlist2heatmaps}()},
+\code{\link{zoom_nmatlist}()},
+\code{\link{zoom_nmat}()}
 
 Other jam import functions: 
 \code{\link{deepTools_matrix2nmat}()}

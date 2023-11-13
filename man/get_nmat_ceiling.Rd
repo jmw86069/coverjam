@@ -47,6 +47,8 @@ Also in all cases, \code{na.rm=TRUE} is used, to prevent returning \code{NA}.
 \seealso{
 Other jam coverage heatmap functions: 
 \code{\link{coverage_matrix2nmat}()},
-\code{\link{nmatlist2heatmaps}()}
+\code{\link{nmatlist2heatmaps}()},
+\code{\link{zoom_nmatlist}()},
+\code{\link{zoom_nmat}()}
 }
 \concept{jam coverage heatmap functions}
