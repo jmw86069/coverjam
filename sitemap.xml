@@ -10,6 +10,9 @@
     <loc>https://jmw86069.github.io/coverjam/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://jmw86069.github.io/coverjam/TODO.html</loc>
+  </url>
+  <url>
     <loc>https://jmw86069.github.io/coverjam/authors.html</loc>
   </url>
   <url>
@@ -41,5 +44,11 @@
   </url>
   <url>
     <loc>https://jmw86069.github.io/coverjam/reference/nmatlist2heatmaps.html</loc>
+  </url>
+  <url>
+    <loc>https://jmw86069.github.io/coverjam/reference/zoom_nmat.html</loc>
+  </url>
+  <url>
+    <loc>https://jmw86069.github.io/coverjam/reference/zoom_nmatlist.html</loc>
   </url>
 </urlset>

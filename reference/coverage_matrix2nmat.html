@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">coverjam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,53 +170,13 @@ function may change to call that function.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other jam coverage heatmap functions: 
 <code><a href="get_nmat_ceiling.html">get_nmat_ceiling</a>()</code>,
-<code><a href="nmatlist2heatmaps.html">nmatlist2heatmaps</a>()</code></p>
+<code><a href="nmatlist2heatmaps.html">nmatlist2heatmaps</a>()</code>,
+<code><a href="zoom_nmatlist.html">zoom_nmatlist</a>()</code>,
+<code><a href="zoom_nmat.html">zoom_nmat</a>()</code></p>
 <p>Other jam import functions: 
 <code><a href="deepTools_matrix2nmat.html">deepTools_matrix2nmat</a>()</code></p></div>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## There is a small example file to use for testing</span></span></span>
-<span class="r-in"><span><span class="va">cov_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"tss_coverage.matrix"</span>, package<span class="op">=</span><span class="st">"platjam"</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span><span class="va">cov_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"h3k4me1_coverage.matrix"</span>, package<span class="op">=</span><span class="st">"platjam"</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">cov_file</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>   <span class="va">nmat</span> <span class="op">&lt;-</span> <span class="fu">coverage_matrix2nmat</span><span class="op">(</span><span class="va">cov_file</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span>   <span class="fu">jamba</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamba/man/printDebug.html" class="external-link">printDebug</a></span><span class="op">(</span><span class="st">"signal_name: "</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">nmat</span>, <span class="st">"signal_name"</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/EnrichedHeatmap" class="external-link">EnrichedHeatmap</a></span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>   <span class="va">color</span> <span class="op">&lt;-</span> <span class="st">"red3"</span>;</span></span>
-<span class="r-in"><span>   <span class="va">signal_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">nmat</span>, <span class="st">"signal_name"</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span>   <span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">6</span>;</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span>   <span class="va">partition</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">kmeans</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">nmat</span><span class="op">)</span>, centers<span class="op">=</span><span class="va">k</span><span class="op">)</span><span class="op">$</span><span class="va">cluster</span>;</span></span>
-<span class="r-in"><span>   <span class="va">EH</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichedHeatmap/man/EnrichedHeatmap.html" class="external-link">EnrichedHeatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">nmat</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      split<span class="op">=</span><span class="va">partition</span>,</span></span>
-<span class="r-in"><span>      pos_line<span class="op">=</span><span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>      use_raster<span class="op">=</span><span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>      col<span class="op">=</span><span class="fu">jamba</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamba/man/getColorRamp.html" class="external-link">getColorRamp</a></span><span class="op">(</span><span class="va">color</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      top_annotation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>         lines<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/EnrichedHeatmap/man/anno_enriched.html" class="external-link">anno_enriched</a></span><span class="op">(</span>gp<span class="op">=</span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>col<span class="op">=</span><span class="fu">colorjam</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/colorjam/man/rainbowJam.html" class="external-link">rainbowJam</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="op">)</span>,</span></span>
-<span class="r-in"><span>      axis_name_gp<span class="op">=</span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fontsize<span class="op">=</span><span class="fl">8</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      name<span class="op">=</span><span class="va">signal_name</span>,</span></span>
-<span class="r-in"><span>      column_title<span class="op">=</span><span class="va">signal_name</span></span></span>
-<span class="r-in"><span>   <span class="op">)</span>;</span></span>
-<span class="r-in"><span>   <span class="va">PHM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span><span class="va">partition</span>,</span></span>
-<span class="r-in"><span>      use_raster<span class="op">=</span><span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>      col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu">colorjam</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/colorjam/man/rainbowJam.html" class="external-link">rainbowJam</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>         names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      name<span class="op">=</span><span class="st">"partition"</span>,</span></span>
-<span class="r-in"><span>      show_row_names<span class="op">=</span><span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>      width<span class="op">=</span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">3</span>, <span class="st">"mm"</span><span class="op">)</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">PHM</span> <span class="op">+</span> <span class="va">EH</span>, main_heatmap<span class="op">=</span><span class="fl">2</span><span class="op">)</span>;</span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in coverage_matrix2nmat(cov_file):</span> Supplied x must be class data.frame, DataFrame, data.table, or tibble.</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
