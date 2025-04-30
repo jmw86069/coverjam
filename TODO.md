@@ -1,3 +1,13 @@
+# TODO 23apr2024
+
+* Complete the full migration so that `platjam` calls functions in this package
+
+* For profile plots, the error bars sometimes exceed the y-axis range.
+
+   * Either expand the y-axis range to accomodate the region required, or
+   * Clip the error bar so it is not shown beyond the plot panel boundary.
+
+
 # TODO 13nov2023
 
 * Migrate fully functional `nmatlist2heatmaps()` and supporting functions.
